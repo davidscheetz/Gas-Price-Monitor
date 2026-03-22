@@ -1,0 +1,61 @@
+# .github/workflows/monitor.yml
+#
+# Runs every 2 hours. The scraper itself checks whether it's
+# within 7am–9pm Central before doing anything.
+#
+# GitHub Actions cron runs in UTC. These times (12:00–02:00 UTC)
+# cover 7am–9pm Central Standard Time (UTC-5).
+# During CDT (UTC-6), adjust the range to 13:00–03:00 if needed,
+# or just leave it — a missed edge check doesn't matter much.
+
+name: Gas Price Monitor
+
+on:
+  schedule:
+    - cron: '0 12 * * *'   # 7am CST
+    - cron: '0 14 * * *'   # 9am CST
+    - cron: '0 16 * * *'   # 11am CST
+    - cron: '0 18 * * *'   # 1pm CST
+    - cron: '0 20 * * *'   # 3pm CST
+    - cron: '0 22 * * *'   # 5pm CST
+    - cron: '0 0 * * *'    # 7pm CST (midnight UTC = 7pm CST)
+
+  # Lets you trigger a manual run from the GitHub Actions tab
+  workflow_dispatch:
+
+jobs:
+  check-prices:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Playwright browser
+        run: npx playwright install chromium --with-deps
+
+      - name: Run price monitor
+        env:
+          ALERT_EMAIL:    ${{ secrets.ALERT_EMAIL }}
+          GMAIL_USER:     ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASS: ${{ secrets.GMAIL_APP_PASS }}
+          KWIKTRIP_IDS:   ${{ secrets.KWIKTRIP_IDS }}
+          CASEYS_URLS:    ${{ secrets.CASEYS_URLS }}
+        run: node scraper.js
+
+      - name: Save updated prices
+        run: |
+          git config user.name  "gas-price-bot"
+          git config user.email "gas-price-bot@users.noreply.github.com"
+          git add prices.json
+          git diff --staged --quiet || git commit -m "Update prices $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push
