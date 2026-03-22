@@ -1,1 +1,40 @@
-{}
+{
+  "kt_1213": {
+    "name": "KWIK STAR #1213",
+    "address": "1810 DIAMOND BLVD, NORTH LIBERTY, IA",
+    "prices": {
+      "UNLEADED 87 (10% ETH)": 3.399,
+      "UNLEADED PREMIUM": 4.399,
+      "UNLEADED 88": 3.259,
+      "DIESEL #2": 4.999,
+      "WINTERIZED DIESEL #2": 5.199,
+      "DIESEL EXHAUST FLUID": 4.299
+    },
+    "updatedAt": "2026-03-22T20:11:29.441Z"
+  },
+  "kt_1927": {
+    "name": "KWIK STAR #1927",
+    "address": "1290 S DUBUQUE ST, NORTH LIBERTY, IA",
+    "prices": {
+      "UNLEADED 87 (10% ETH)": 3.299,
+      "UNLEADED PREMIUM": 4.299,
+      "UNLEADED 88": 3.259,
+      "DIESEL #2": 4.999
+    },
+    "updatedAt": "2026-03-22T20:11:29.678Z"
+  },
+  "kt_1918": {
+    "name": "KWIK STAR #1918",
+    "address": "401 W VILLAGE DR, TIFFIN, IA",
+    "prices": {
+      "UNLEADED 87 (10% ETH)": 3.399,
+      "UNLEADED PREMIUM": 4.399,
+      "UNLEADED 87 (0% ETH)": 3.939,
+      "UNLEADED 88": 3.199,
+      "DIESEL #2": 4.699,
+      "WINTERIZED DIESEL #2": 4.899,
+      "DIESEL EXHAUST FLUID": 4.299
+    },
+    "updatedAt": "2026-03-22T20:11:29.989Z"
+  }
+}
