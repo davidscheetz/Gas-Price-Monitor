@@ -1,0 +1,13 @@
+{
+  "name": "gas-price-monitor",
+  "version": "1.0.0",
+  "description": "Monitors Kwik Trip and Casey's gas prices and sends email alerts on changes",
+  "main": "scraper.js",
+  "scripts": {
+    "start": "node scraper.js"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.14",
+    "playwright": "^1.44.0"
+  }
+}
